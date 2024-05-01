@@ -44,7 +44,7 @@ public class CurrencyController {
 			response.setMessageError("Currency code is exist!");
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
-		Currency currency = Currency.builder().name(request.getName()).code(request.getName())
+		Currency currency = Currency.builder().name(request.getName()).code(request.getCode())
 				.rate_float(request.getRateFloat()).description(request.getDescription()).build();
 
 		this.currencyRepository.save(currency);

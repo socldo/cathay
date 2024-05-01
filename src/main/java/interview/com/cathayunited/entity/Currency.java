@@ -16,6 +16,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "currency")
 @Builder
+@NoArgsConstructor // Thêm constructor mặc định
+@AllArgsConstructor
 public class Currency {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
