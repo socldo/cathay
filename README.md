@@ -7,6 +7,9 @@ Beside, I also implemented additional features
 - Swagger-ui: 
     ![image](https://github.com/socldo/cathay/assets/84121453/08713dba-183c-4c38-ae79-b171b3c322ab)
 - Error handling to decorate all API responses
+- Run on Docker
+  <img width="1140" alt="image" src="https://github.com/socldo/cathay/assets/84121453/aca72c8b-dc99-4931-9a78-597932aa1423">
+
 - Request and response body log of all API be called and call out external APIs:
   + POST: /api/currency/create
     request : {
