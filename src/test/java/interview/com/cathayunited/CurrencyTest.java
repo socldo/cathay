@@ -68,10 +68,10 @@ public class CurrencyTest {
 		ResultActions response = mockMvc.perform(post("/api/currency/create").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(currency)));
 		// then - verify the result or output using assert statements
-		response.andDo(print()).andExpect(status().isCreated()).andExpect(jsonPath("$.code", is(currency.getCode())))
-				.andExpect(jsonPath("$.name", is(currency.getName())))
-				.andExpect(jsonPath("$.description", is(currency.getDescription())))
-				.andExpect(jsonPath("$.rate_float", is(currency.getRate_float())));
+		response.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.data.code", is(currency.getCode())))
+				.andExpect(jsonPath("$.data.name", is(currency.getName())))
+				.andExpect(jsonPath("$.data.description", is(currency.getDescription())))
+				.andExpect(jsonPath("$.data.rate_float").value(currency.getRate_float()));
 	}
 
 	@Test
@@ -107,6 +107,8 @@ public class CurrencyTest {
 				.description("Viet Nam dong").build());
 		listOfCurrencies.add(Currency.builder().name("USD").code("USD").rate_float((float) 20.66)
 				.description("United State").build());
+		listOfCurrencies.add(Currency.builder().name("GPB").code("GPB").rate_float((float) 20.66)
+				.description("British Pound Sterling").build());
 		given(currencyRepository.findAll()).willReturn(listOfCurrencies);
 
 		ResultActions response = mockMvc.perform(get("/api/currency"));
