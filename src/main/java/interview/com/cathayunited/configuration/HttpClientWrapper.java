@@ -11,13 +11,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class HttpClientWrapper {
 
-	private final HttpURLConnection connection;
+	private static HttpURLConnection connection;
 
 	public HttpClientWrapper() throws IOException {
 		URL url = new URL("https://api.coindesk.com/v1/bpi/currentprice.json");
-		connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("GET");
-		connection.connect();
+		if (HttpClientWrapper.connection == null) {
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+
+		} else
+			connection.connect();
 	}
 
 	public String getResponse() throws IOException {
