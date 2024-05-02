@@ -9,6 +9,10 @@ Beside, I also implemented additional features
 - Error handling to decorate all API responses
 - Run on Docker
   <img width="1140" alt="image" src="https://github.com/socldo/cathay/assets/84121453/aca72c8b-dc99-4931-9a78-597932aa1423">
+- Implement Singleton Design pattern
+   ![image](https://github.com/socldo/cathay/assets/84121453/9b1b54a3-4560-419f-909c-596eae5b599f)
+
+
 
 - Request and response body log of all API be called and call out external APIs:
   + POST: /api/currency/create
