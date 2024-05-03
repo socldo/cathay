@@ -55,7 +55,7 @@ public class CurrencyController {
 	}
 
 	@Operation(summary = "API udpate currency", description = "API update currency")
-	@PutMapping(value = "/{id}/update", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@PutMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<BaseResponse<CurrencyResponse>> updateCurrency(@PathVariable("id") int id,
 			@io.swagger.v3.oas.annotations.parameters.RequestBody @Valid @RequestBody CRUDCurrencyRequest request)
 			throws Exception {
@@ -87,7 +87,7 @@ public class CurrencyController {
 	}
 
 	@Operation(summary = "API delete currency", description = "API delete currency")
-	@DeleteMapping(value = "/{id}/delete", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<BaseResponse<CurrencyResponse>> deleteCurrency(@PathVariable("id") int id) throws Exception {
 		BaseResponse<CurrencyResponse> response = new BaseResponse<>();
 		Optional<Currency> currency = this.currencyRepository.findById(id);
