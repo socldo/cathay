@@ -23,7 +23,6 @@ import io.swagger.v3.oas.annotations.Operation;
 public class CoindeskController {
 	private final String COINDESK_API_URL = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
-	private final MessageSource messageSource = null;
 
 	@Operation(summary = "Call coindesk API, analyze its downstream content and data conversion, and\n"
 			+ "implement the new API.", description = "coindesk API: https://api.coindesk.com/v1/bpi/currentprice.json")
@@ -41,17 +40,17 @@ public class CoindeskController {
 		List<CoindeskFormatResponse> coindeskFormatResponseList = new ArrayList<>();
 		CoindeskFormatResponse coindeskFormatResponseUSD = new CoindeskFormatResponse(
 				coindeskResponse.getTime().getUpdated(), coindeskResponse.getBpi().getUsd().getDescription(),
-				coindeskResponse.getBpi().getUsd().getRate_float(), messageSource.getMessage("USD", null, locale));
+				coindeskResponse.getBpi().getUsd().getRate_float(), "USD");
 		coindeskFormatResponseList.add(coindeskFormatResponseUSD);
 
 		CoindeskFormatResponse coindeskFormatResponseGBP = new CoindeskFormatResponse(
 				coindeskResponse.getTime().getUpdated(), coindeskResponse.getBpi().getGbd().getDescription(),
-				coindeskResponse.getBpi().getGbd().getRate_float(), messageSource.getMessage("GBP", null, locale));
+				coindeskResponse.getBpi().getGbd().getRate_float(), "GBP");
 		coindeskFormatResponseList.add(coindeskFormatResponseGBP);
 
 		CoindeskFormatResponse coindeskFormatResponseEUR = new CoindeskFormatResponse(
 				coindeskResponse.getTime().getUpdated(), coindeskResponse.getBpi().getEur().getDescription(),
-				coindeskResponse.getBpi().getEur().getRate_float(), messageSource.getMessage("EUR", null, locale));
+				coindeskResponse.getBpi().getEur().getRate_float(), "EUR");
 		coindeskFormatResponseList.add(coindeskFormatResponseEUR);
 		response.setData(coindeskFormatResponseList);
 

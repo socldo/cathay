@@ -30,9 +30,15 @@ public class SynchronizationExchangeRate {
 			CoindeskResponse coindeskResponse = restTemplate.getForObject(COINDESK_API_URL, CoindeskResponse.class);
 			Optional<Currency> currencyUsd = currencyRepository
 					.findOneByCode(coindeskResponse.getBpi().getUsd().getCode());
+
 			if (currencyUsd.isPresent()) {
 				currencyUsd.get().setRate_float(coindeskResponse.getBpi().getUsd().getRate_float());
 				currencyRepository.save(currencyUsd.get());
+			} else {
+				Currency currencyUsdCreate = Currency.builder().name("USD").code("USD")
+						.rate_float(coindeskResponse.getBpi().getUsd().getRate_float())
+						.description("United States Dollar").build();
+				this.currencyRepository.save(currencyUsdCreate);
 			}
 
 			Optional<Currency> currencyEur = currencyRepository
@@ -40,6 +46,10 @@ public class SynchronizationExchangeRate {
 			if (currencyEur.isPresent()) {
 				currencyEur.get().setRate_float(coindeskResponse.getBpi().getEur().getRate_float());
 				currencyRepository.save(currencyEur.get());
+			} else {
+				Currency currencyEurCreate = Currency.builder().name("EUR").code("EUR")
+						.rate_float(coindeskResponse.getBpi().getEur().getRate_float()).description("Euro").build();
+				this.currencyRepository.save(currencyEurCreate);
 			}
 
 			Optional<Currency> currencyGbd = currencyRepository
@@ -47,10 +57,15 @@ public class SynchronizationExchangeRate {
 			if (currencyGbd.isPresent()) {
 				currencyGbd.get().setRate_float(coindeskResponse.getBpi().getGbd().getRate_float());
 				currencyRepository.save(currencyGbd.get());
+			} else {
+				Currency currencyGbdCreate = Currency.builder().name("GBP").code("GBP")
+						.rate_float(coindeskResponse.getBpi().getGbd().getRate_float())
+						.description("British Pound Sterling").build();
+				this.currencyRepository.save(currencyGbdCreate);
 			}
-			
-			System.out.println(String.format("%s: SynchronizationExchangeRate SUCCESS",
-					Utils.getDatetimeFormatVN(new Date())));
+
+			System.out.println(
+					String.format("%s: SynchronizationExchangeRate SUCCESS", Utils.getDatetimeFormatVN(new Date())));
 		} catch (Exception e) {
 			System.out.println(String.format("%s: SynchronizationExchangeRate ERROR: %s",
 					Utils.getDatetimeFormatVN(new Date()), e.getLocalizedMessage()));
