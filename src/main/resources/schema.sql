@@ -4,6 +4,8 @@ CREATE TABLE currency (
   id INT NOT NULL AUTO_INCREMENT, 
   name varchar(255),
   code varchar(255),
+  symbol varchar(255),
+  rate varchar(255),
   rate_float float,
   description varchar(255) ,
   created_at datetime DEFAULT current_timestamp(),

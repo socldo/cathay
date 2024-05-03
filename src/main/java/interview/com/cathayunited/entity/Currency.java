@@ -29,6 +29,12 @@ public class Currency {
 	@Column(nullable = false, length = 255)
 	private String name;
 
+	@Column(nullable = false, length = 255)
+	private String symbol;
+
+	@Column(nullable = false, length = 255)
+	private String rate;
+
 	@Column(name = "rate_float", nullable = false)
 	private float rate_float;
 
@@ -97,6 +103,22 @@ public class Currency {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
 	}
 
 }

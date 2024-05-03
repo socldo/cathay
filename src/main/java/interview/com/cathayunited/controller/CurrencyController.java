@@ -45,7 +45,8 @@ public class CurrencyController {
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		Currency currency = Currency.builder().name(request.getName()).code(request.getCode())
-				.rate_float(request.getRateFloat()).description(request.getDescription()).build();
+				.rate_float(request.getRateFloat()).description(request.getDescription()).rate(request.getRate())
+				.symbol(request.getSymbol()).build();
 
 		this.currencyRepository.save(currency);
 		CurrencyResponse resposneData = new CurrencyResponse(currency);
@@ -77,6 +78,8 @@ public class CurrencyController {
 		currency.get().setCode(request.getCode());
 		currency.get().setRate_float(request.getRateFloat());
 		currency.get().setDescription(request.getDescription());
+		currency.get().setRate(request.getRate());
+		currency.get().setSymbol(request.getSymbol());
 		this.currencyRepository.save(currency.get());
 		CurrencyResponse resposneData = new CurrencyResponse(currency.get());
 		response.setData(resposneData);

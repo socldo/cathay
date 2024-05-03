@@ -18,6 +18,12 @@ public class CurrencyResponse {
 	@JsonProperty("name")
 	private String name;
 
+	@JsonProperty("rate")
+	private String rate;
+
+	@JsonProperty("symbol")
+	private String symbol;
+
 	@JsonProperty("rate_float")
 	private float rateFloat;
 
@@ -40,6 +46,8 @@ public class CurrencyResponse {
 		this.name = currency.getName();
 		this.rateFloat = currency.getRate_float();
 		this.description = currency.getDescription();
+		this.rate = currency.getRate();
+		this.symbol = currency.getSymbol();
 		this.createdAt = Utils.getDateFormatVN(currency.getCreatedAt());
 		this.updatedAt = Utils.getDateFormatVN(currency.getUpdatedAt());
 	}

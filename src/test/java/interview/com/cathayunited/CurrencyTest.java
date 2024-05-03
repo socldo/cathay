@@ -58,10 +58,11 @@ public class CurrencyTest {
 	@Test
 	void testCreateNewCurrency() throws Exception {
 		CRUDCurrencyRequest cRUDCurrencyRequest = new CRUDCurrencyRequest("Japan", "JPY",
-				(@Min(value = 0, message = "Rate_float must be >=0!") float) 1.56, "Currency of Japan");
+				(@Min(value = 0, message = "Rate_float must be >=0!") float) 1.56, "Currency of Japan", "1.56",
+				"OHAkc~");
 		Currency currency = Currency.builder().name(cRUDCurrencyRequest.getName()).code(cRUDCurrencyRequest.getName())
 				.rate_float(cRUDCurrencyRequest.getRateFloat()).description(cRUDCurrencyRequest.getDescription())
-				.build();
+				.rate(cRUDCurrencyRequest.getRate()).symbol(cRUDCurrencyRequest.getSymbol()).build();
 
 		currencyRepository.save(currency);
 		given(currencyRepository.save(currency)).willAnswer((invocation) -> invocation.getArgument(0));
@@ -77,7 +78,8 @@ public class CurrencyTest {
 	@Test
 	void testUpdateNewCurrency() throws Exception {
 		CRUDCurrencyRequest cRUDCurrencyRequest = new CRUDCurrencyRequest("Japan", "JPY",
-				(@Min(value = 0, message = "Rate_float must be >=0!") float) 1.56, "Currency of Japan");
+				(@Min(value = 0, message = "Rate_float must be >=0!") float) 1.56, "Currency of Japan", "1.56",
+				"OHAkc~");
 		Optional<Currency> currency = this.currencyRepository.findById(1);
 		if (currency.isPresent()) {
 			Currency currencyData = currency.get();
@@ -85,6 +87,8 @@ public class CurrencyTest {
 			currencyData.setName(cRUDCurrencyRequest.getName());
 			currencyData.setDescription(cRUDCurrencyRequest.getDescription());
 			currencyData.setRate_float(cRUDCurrencyRequest.getRateFloat());
+			currencyData.setRate(cRUDCurrencyRequest.getRate());
+			currencyData.setSymbol(cRUDCurrencyRequest.getSymbol());
 			currencyRepository.save(currencyData);
 			given(currencyRepository.save(currencyData)).willAnswer((invocation) -> invocation.getArgument(0));
 			ResultActions response = mockMvc.perform(put("/api/currency/1/update")
